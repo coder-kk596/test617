@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>APEX</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <link rel="stylesheet" href="/static/css/font-awesome.min.css">
+
+    <link rel="stylesheet/less" type="text/css" href="/static/css/style.less" />
+
+    <script src="/static/js/jquery.min.js"></script>
+
+    <script	src="/static/js/bootstrap.min.js" type="text/javascript" ></script>
+
+    <script	src="/static/js/jquery.smint.js" type="text/javascript" ></script>
+
+    <script type="text/javascript" src="/static/js/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.easy-ticker.js"></script>
+
+    <script src="/static/js/less.js" type="text/javascript"></script>
+
+    <script src="/static/js/isotop.js"></script>
+
+    <script src="/static/js/jquery.colorbox.js"></script>
+
+    <script type="text/javascript">
+
+        $(function() {
+            var elm = $('.subMenu');
+            var startPos = $(elm).offset().top;
+            $.event.add(window, "scroll", function() {
+                var p = $(window).scrollTop();
+                $(elm).css('position',((p) > startPos) ? 'fixed' : 'static');
+                $(elm).css('top',((p) > startPos) ? '0px' : '');
+            });
+        });
+
+    </script>
+
+</head>
+
+<body>
+{% load staticfiles %}
+
+
+<div class="wrap ">
+    <div class="subMenu" >
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2 th-logo">
+                    <h1>CoderBlog</h1>
+                </div>
+                <div class="col-md-10">
+
+                    <div class="inner pull-right">
+                        <a href="{% url 'final_app:hello' %}" class="subNavBtn"><i class="fa fa-shopping-cart"></i>首页</a>
+                        <a href="{% url 'final_app:my_blog' %}" class="subNavBtn">我的文章</a>
+                        <a href="{% url 'final_app:my_blog' %}" class="subNavBtn">教程</a>
+                        <a href="{% url 'final_app:my_blog' %}" class="subNavBtn">日常鸭</a>
+                        <a href="{% url 'final_app:my_blog' %}" class="subNavBtn">联系我</a>
+                    </div>
+
+                </div>
+            </div><!-- row -->
+        </div>
+    </div>
+    <div class="parent">
+        <div class="inner">
+            {% for article in articles %}
+            <div>
+                <div class="a1">
+                    <h3>
+                        <a href="{% url 'article:blog' article.id %}">{{ article.title }}</a>
+                    </h3>
+                    <div class="tag">标签</div>
+                    <div class="text">{{ article.body|slice:'100' }}...</div>
+                    <p>
+                        <i class="fa fa-clock-o">{{ article.created }}...</i>
+                    </p>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="write_blog">
+            <div class="a2">
+                <a href="{% url 'article:blog-write' %}"><h3><i class="fa fa-pencil-square-o"></i>写文章</h3></a>
+            </div>
+
+        </div>
+        <div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+</div>
+
+
+</body>
+</html>
